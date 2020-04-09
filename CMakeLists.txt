@@ -1,6 +1,5 @@
-project(MPC)
-
 cmake_minimum_required (VERSION 3.5)
+project(mpc-car-simulation)
 
 # -g allows for gdb debugging
 # turn on -03 for best performance
@@ -11,19 +10,12 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
 set(sources src/MPC.cpp src/main.cpp)
 
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
-include_directories(src/Eigen-3.3)
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-
-include_directories(/usr/local/opt/openssl/include)
-link_directories(/usr/local/opt/openssl/lib)
-link_directories(/usr/local/Cellar/libuv/1.11.0/lib)
-
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+include_directories(include)
+include_directories(include/Eigen-3.3)
+include_directories(${CMAKE_SOURCE_DIR}/3rdparty/include)
+link_directories(${CMAKE_SOURCE_DIR}/3rdparty/lib)
+link_directories(${CMAKE_SOURCE_DIR}/3rdparty/lib64)
 
 add_executable(mpc ${sources})
-
 target_link_libraries(mpc ipopt z ssl uv uWS)
 

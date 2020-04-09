@@ -1,12 +1,6 @@
-# Pass the Ipopt source directory as the first argument
-if [ -z $1 ]
-then
-    echo "Specifiy the location of the Ipopt source directory in the first argument."
-    exit
-fi
-cd $1
-
-prefix=/usr/local
+mkdir -p 3rdparty
+prefix=$PWD/3rdparty
+cd Ipopt
 srcdir=$PWD
 
 echo "Building Ipopt from ${srcdir}"
@@ -17,7 +11,7 @@ cd $srcdir/ThirdParty/Blas
 ./get.Blas
 mkdir -p build && cd build
 ../configure --prefix=$prefix --disable-shared --with-pic
-sudo make install
+make install
 
 # Lapack
 cd $srcdir/ThirdParty/Lapack
@@ -25,7 +19,7 @@ cd $srcdir/ThirdParty/Lapack
 mkdir -p build && cd build
 ../configure --prefix=$prefix --disable-shared --with-pic \
     --with-blas="$prefix/lib/libcoinblas.a -lgfortran"
-sudo make install
+make install
 
 # ASL
 cd $srcdir//ThirdParty/ASL
@@ -39,7 +33,7 @@ cd $srcdir/ThirdParty/Mumps
 cd $srcdir
 ./configure --prefix=$prefix coin_skip_warn_cxxflags=yes \
     --with-blas="$prefix/lib/libcoinblas.a -lgfortran" \
-    --with-lapack=$prefix/lib/libcoinlapack.a
+    --with-lapack="$prefix/lib/libcoinlapack.a"
 make
 make test
-sudo make -j1 install
+make -j1 install
