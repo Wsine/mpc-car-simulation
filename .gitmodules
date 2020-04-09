@@ -1,0 +1,7 @@
+[submodule "Ipopt"]
+	path = Ipopt
+	url = https://github.com/coin-or/Ipopt.git
+	branch = stable/3.12
+[submodule "uWebSockets"]
+	path = uWebSockets
+	url = https://github.com/uWebSockets/uWebSockets

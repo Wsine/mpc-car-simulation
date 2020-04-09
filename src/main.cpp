@@ -4,10 +4,11 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include "Eigen-3.3/Eigen/Core"
-#include "Eigen-3.3/Eigen/QR"
-#include "MPC.h"
+
 #include "json.hpp"
+#include "Eigen/Core"
+#include "Eigen/QR"
+#include "MPC.h"
 
 // for convenience
 using json = nlohmann::json;
