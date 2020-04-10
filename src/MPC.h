@@ -4,8 +4,6 @@
 #include <vector>
 #include "Eigen/Core"
 
-using namespace std;
-
 class MPC {
  public:
   MPC();
@@ -18,13 +16,12 @@ class MPC {
 
   // Solve the model given an initial state and polynomial coefficients.
   // Return the first actuatotions.
-  vector<double> Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs);
+  std::vector<double> Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs);
 
-  void set_latency (double latency);
-  void set_velocity (double velocity);
+  void set_latency(double latency);
+  void set_velocity(double velocity);
 
  private:
-
   // delay before control actually applies in sec
   double latency_ = 0;
   // desired car velocity
